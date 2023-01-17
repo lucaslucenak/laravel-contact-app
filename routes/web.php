@@ -29,15 +29,15 @@ Route::prefix('contact')->group(function () {
     Route::get('/', function () {
         return view('contact.index')->with('contacts', getContacts());
     })->name('contact.index');
-    
-    Route::get('/{id}', function ($id) {
-    abort_if(!isset(getContacts()[$id]), 404);
-        return view('contact.show')->with('contact', getContacts($id));
-    })->name('contact.show');
-    
+
     Route::get('/create', function () {
         return view('contact.create');
     })->name('contact.create');
+    
+    Route::get('/{id}', function ($id) {
+        abort_if(!isset(getContacts()[$id]), 404);
+        return view('contact.show')->with('contact', getContacts($id));
+    })->name('contact.show');
 });
 
 Route::get('/company/{name?}', function ($name = null) {
