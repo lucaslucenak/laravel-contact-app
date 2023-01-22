@@ -18,6 +18,7 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            {{-- Filter Bar --}}
                             @include('contact.index.components._filter', ['companies' => $companies])
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -31,25 +32,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($contacts as $contact)
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>{{ $contact['name'] }}</td>
-                                            <td>{{ $contact['lastName'] }}</td>
-                                            <td>{{ $contact['email'] }}</td>
-                                            <td>{{ $contact['companyName'] }}</td>
-                                            <td width="150">
-                                                <a href="{{ route('contact.show', $contact['id']) }}"
-                                                    class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
-                                                        class="fa fa-eye"></i></a>
-                                                <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary"
-                                                    title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a href="#" class="btn btn-sm btn-circle btn-outline-danger"
-                                                    title="Delete" onclick="confirm('Are you sure?')"><i
-                                                        class="fa fa-times"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    {{-- @forelse ($contacts as $contact)
+                                        @include('contact.index.components._contact', ['contact' => $contact])
+                                    @empty
+                                        <p>No contacts found.</p>
+                                    @endforelse --}}
+                                    @each('contact.index.components._contact', $contacts, 'contact', 'contact.index.components._empty-contacts') {{--Works as the same--}}
                                 </tbody>
                             </table>
 
