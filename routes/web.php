@@ -19,11 +19,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('contact')->group(function () {
-    Route::get('/', [ContactController::class, 'index'])->name('contact.index');
-
-    Route::get('/create', [ContactController::class, 'create'])->name('contact.create');
-    
-    Route::get('/{id}', [ContactController::class, 'show'])->name('contact.show');
+    Route::controller(ContactController::class)->name('contact.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+    });
 });
 
 Route::get('/company/{name?}', function ($name = null) {
