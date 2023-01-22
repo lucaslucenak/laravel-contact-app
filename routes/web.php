@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome.welcome');
-});
+Route::get('/', WelcomeController::class);
 
 Route::prefix('contact')->group(function () {
     Route::controller(ContactController::class)->name('contact.')->group(function () {
