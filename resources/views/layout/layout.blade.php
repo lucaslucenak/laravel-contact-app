@@ -14,7 +14,7 @@
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
   </head>
   <body>
-    <x-navbar/>
+    <x-_navbar/>
     @yield('content')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>

@@ -28,13 +28,28 @@ function getContacts($id = null) {
     }
 }
 
+function getCompanies($id = null) {
+    $companies = [
+        1 => ['id' => 1, 'name' => 'Company 1', 'contacts' => 3], 
+        2 => ['id' => 2, 'name' => 'Company 2', 'contacts' => 5]
+    ];
+    if ($id != null) {
+        return $companies[$id];
+    }
+    else {
+        return $companies;
+    }
+}
+
 Route::get('/', function () {
     return redirect('/contact');
 });
 
 Route::prefix('contact')->group(function () {
     Route::get('/', function () {
-        return view('contact.index')->with('contacts', getContacts());
+        return view('contact.index.index')
+            ->with('contacts', getContacts())
+            ->with('companies', getCompanies());
     })->name('contact.index');
 
     Route::get('/create', function () {
