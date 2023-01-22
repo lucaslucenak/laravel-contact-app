@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,53 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-function getContacts($id = null) {
-    $contacts = [
-        1 => ['id' => 1, 'name' => 'Lucas', 'lastName' => 'José', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123'],
-        2 => ['id' => 2, 'name' => 'Felipe', 'lastName' => 'Almeida', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123'],
-        3 => ['id' => 3, 'name' => 'Elmer', 'lastName' => 'Ferreira', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123']
-    ];
-
-    if ($id != null) {
-        return $contacts[$id];
-    }
-    else {
-        return $contacts;
-    }
-}
-
-function getCompanies($id = null) {
-    $companies = [
-        1 => ['id' => 1, 'name' => 'Company 1', 'contacts' => 3], 
-        2 => ['id' => 2, 'name' => 'Company 2', 'contacts' => 5]
-    ];
-    if ($id != null) {
-        return $companies[$id];
-    }
-    else {
-        return $companies;
-    }
-}
-
 Route::get('/', function () {
     return view('welcome.welcome');
 });
 
 Route::prefix('contact')->group(function () {
-    Route::get('/', function () {
-        return view('contact.index.index')
-            ->with('contacts', getContacts())
-            ->with('companies', getCompanies());
-    })->name('contact.index');
+    Route::get('/', [ContactController::class, 'index'])->name('contact.index');
 
-    Route::get('/create', function () {
-        return view('contact.create');
-    })->name('contact.create');
+    Route::get('/create', [ContactController::class, 'create'])->name('contact.create');
     
-    Route::get('/{id}', function ($id) {
-        abort_if(!isset(getContacts()[$id]), 404);
-        return view('contact.show')->with('contact', getContacts($id));
-    })->name('contact.show');
+    Route::get('/{id}', [ContactController::class, 'show'])->name('contact.show');
 });
 
 Route::get('/company/{name?}', function ($name = null) {
