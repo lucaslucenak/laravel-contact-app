@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('contact.layout')
 
 @section('title', 'Create Contact')
 

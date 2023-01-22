@@ -42,7 +42,7 @@ function getCompanies($id = null) {
 }
 
 Route::get('/', function () {
-    return redirect('/contact');
+    return view('welcome.welcome');
 });
 
 Route::prefix('contact')->group(function () {
