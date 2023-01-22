@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-function getContacts() {
-    return [
-        1 => ['id' => 1, 'name' => 'Lucas', 'lastName' => 'José', 'email'=> 'email@email.com', 'companyName' => 'company01'],
-        2 => ['id' => 2, 'name' => 'Felipe', 'lastName' => 'Almeida', 'email'=> 'email@email.com', 'companyName' => 'company01'],
-        3 => ['id' => 3, 'name' => 'Elmer', 'lastName' => 'Ferreira', 'email'=> 'email@email.com', 'companyName' => 'company01']
+function getContacts($id = null) {
+    $contacts = [
+        1 => ['id' => 1, 'name' => 'Lucas', 'lastName' => 'José', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123'],
+        2 => ['id' => 2, 'name' => 'Felipe', 'lastName' => 'Almeida', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123'],
+        3 => ['id' => 3, 'name' => 'Elmer', 'lastName' => 'Ferreira', 'email'=> 'email@email.com', 'address' => 'rua do nunca', 'companyName' => 'company01', 'phone' => '123123123']
     ];
+
+    if ($id != null) {
+        return $contacts[$id];
+    }
+    else {
+        return $contacts;
+    }
 }
 
 Route::get('/', function () {

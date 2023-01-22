@@ -1,5 +1,7 @@
 @extends('layout.layout')
 
+@section('title', 'All Contacts')
+
 @section('content')
     <main class="py-5">
         <div class="container">
