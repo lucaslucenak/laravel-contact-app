@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +28,18 @@ Route::prefix('contact')->group(function () {
     });
 });
 
-Route::get('/company/{name?}', function ($name = null) {
-    if ($name) {
-        return 'company ' . $name;
-    }
-    else {
-        return 'all companies';
-    }
-})->whereAlphaNumeric('name');
+// Create all the routes when the Controller was created usind the 'php artisan make:controller ControllerNmae -r'
+// Route::resource('/company', CompanyController::class);
+// Or this
+
+Route::resources([
+    '/company' => CompanyController::class,
+    '/tag' => TagController::class,
+    '/task' => TaskController::class,
+    '/activity' => ActivityController::class
+]);
+
+Route::resource('/contact.notes', ContactNotesController::class)->shallow();
 
 Route::fallback(function () {
     return 'sorry, this page does not exists';
