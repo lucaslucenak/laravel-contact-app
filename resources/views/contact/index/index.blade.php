@@ -37,7 +37,8 @@
                                     @empty
                                         <p>No contacts found.</p>
                                     @endforelse --}}
-                                    @each('contact.index.components._contact', $contacts, 'contact', 'contact.index.components._empty-contacts') {{--Works as the same--}}
+                                    {{--Works as the same--}}
+                                    @each('contact.index.components._contact', $contacts, 'contact', 'contact.index.components._empty-contacts')
                                 </tbody>
                             </table>
 
